@@ -1,10 +1,11 @@
 #include "output/state.h"
 
+#include "cli/cl_parser.h"
 #include "types.h"
 #include "vendor/cJSON.h"
 #include <stdio.h>
 
-b8 dump_state(hx_processor* processor)
+b8 dump_state(hx_processor* processor, hx_cli *cli)
 {
 	cJSON *registers = NULL;
 	cJSON *reg = NULL;
@@ -27,11 +28,10 @@ b8 dump_state(hx_processor* processor)
 
 	char *output = cJSON_Print(state);
 
-	FILE *out_file = fopen("state.json", "w");
 
-	fputs(output, out_file);
+	fputs(output, cli->state_file);
 
-	fclose(out_file);
+	fclose(cli->state_file);
 
 	cJSON_Delete(state);
 	return success;

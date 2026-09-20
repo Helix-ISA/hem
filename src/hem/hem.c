@@ -36,7 +36,7 @@ int hem(int argc, char **argv)
 	}
 
 	if (cli.dump_state) {
-		if (!dump_state(&processor)) {
+		if (!dump_state(&processor, &cli)) {
 			status = 1;
 			goto cleanup_cli;
 		}
