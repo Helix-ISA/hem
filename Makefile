@@ -5,7 +5,7 @@ CC := clang
 CFLAGS := -Wall -Wextra -Werror -Wpedantic -g -O0
 DFLAGS := -MMD -MP
 
-INCS := -Iinclude/
+INCS := -Iinclude/ -Isrc/
 
 SRCS := $(shell find src -type f -name "*.c")
 OBJS := $(SRCS:src/%.c=bin-int/%.o)

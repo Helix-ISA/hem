@@ -641,6 +641,8 @@ b8 processor_run(hx_processor *processor, hx_memory *memory, hx_cli *cli)
 
 	u32 program_size = fread(memory->memory, 1, MAX_MEMORY, cli->input_file);
 
+	printf("size: %i\n", program_size);
+
 	while (!processor->halted) {
 		u32 encoded;
 		hx_instruction instruction;

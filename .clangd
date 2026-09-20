@@ -5,6 +5,7 @@ CompileFlags:
     - -Werror
     - -Wpedantic
     - -I/home/alex/Helix-ISA/hem/include/
+    - -I/home/alex/Helix-ISA/hem/src/
 
 Diagonstics:
   UnusedIncludes: Strict
