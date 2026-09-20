@@ -641,13 +641,6 @@ b8 processor_run(hx_processor *processor, hx_memory *memory, hx_cli *cli)
 
 	u32 program_size = fread(memory->memory, 1, MAX_MEMORY, cli->input_file);
 
-	printf("program_size=%u\n", program_size);
-	printf("MEM[40]: %02x %02x %02x %02x\n",
-			memory->memory[0x40],
-			memory->memory[0x41],
-			memory->memory[0x42],
-			memory->memory[0x43]);
-
 	while (!processor->halted) {
 		u32 encoded;
 		hx_instruction instruction;
@@ -657,15 +650,10 @@ b8 processor_run(hx_processor *processor, hx_memory *memory, hx_cli *cli)
 			return failure;
 		}
 
-		u32 pc = processor->pc;
-
 		encoded = processor_fetch32(processor, memory);
-
-		printf("pc=%08x raw=%08x\n", pc, encoded);
 
 		instruction = instruction_decode(encoded);
 
-		printf("inst: %s\n", mnemonic_name(instruction.mnemonic));
 
 		if (!processor_execute(processor, memory, &instruction)) {
 			return failure;

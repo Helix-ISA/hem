@@ -6,6 +6,8 @@
 
 typedef struct {
 	FILE *input_file;
+
+	b8 dump_state;
 } hx_cli;
 
 b8 cl_parse_init(hx_cli *cli);
