@@ -2,3 +2,4 @@
 bin/
 bin-int/
 out
+state.json
