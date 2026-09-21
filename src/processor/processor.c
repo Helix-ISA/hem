@@ -77,9 +77,12 @@ static b8 processor_execute(hx_processor *processor, hx_memory *memory, hx_instr
 		case HX_MN_ADDI: {
 			u8 rd = instruction->operands[0].value.reg;
 			u8 rs1 = instruction->operands[1].value.reg;
-			u16 imm = instruction->operands[2].value.imm;
+			s64 imm = (s64)(instruction->operands[2].value.imm & 0xFFF);
 
-			processor->gpr[rd] = processor->gpr[rs1] + imm;
+			if (imm & 0x800)
+				imm |= ~0xFFFLL;
+
+			processor->gpr[rd] = (s64)processor->gpr[rs1] + imm;
 
 			return success;
 		}
@@ -88,7 +91,7 @@ static b8 processor_execute(hx_processor *processor, hx_memory *memory, hx_instr
 			u8 rs1 = instruction->operands[1].value.reg;
 			u8 rs2 = instruction->operands[2].value.reg;
 
-			processor->gpr[rd] = processor->gpr[rs1] - processor->gpr[rs2];
+			processor->gpr[rd] = (s64)processor->gpr[rs1] - (s64)processor->gpr[rs2];
 
 			return success;
 		}
@@ -512,6 +515,14 @@ static b8 processor_execute(hx_processor *processor, hx_memory *memory, hx_instr
 
 			return success;
 		}
+		case HX_MN_MOV: {
+			u8 rd = instruction->operands[0].value.reg;
+			u16 imm = instruction->operands[1].value.imm;
+
+			processor->gpr[rd] = (s16)imm;
+
+			return success;
+		}
 		case HX_MN_CSL: {
 			u8 rd = instruction->operands[0].value.reg;
 			u8 rs1 = instruction->operands[1].value.reg;
@@ -653,7 +664,6 @@ b8 processor_run(hx_processor *processor, hx_memory *memory, hx_cli *cli)
 		encoded = processor_fetch32(processor, memory);
 
 		instruction = instruction_decode(encoded);
-
 
 		if (!processor_execute(processor, memory, &instruction)) {
 			return failure;

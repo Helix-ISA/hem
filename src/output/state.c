@@ -20,7 +20,7 @@ b8 dump_state(hx_processor* processor, hx_cli *cli)
 	cJSON_AddItemToObject(state, "registers", registers);
 
 	for (u8 i = 0; i < GPR_COUNT; i++) {
-		reg = cJSON_CreateNumber(processor->gpr[i]);
+		reg = cJSON_CreateNumber((s64)processor->gpr[i]);
 		if (reg == NULL)
 			goto end;
 		cJSON_AddItemToArray(registers, reg);

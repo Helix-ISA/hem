@@ -151,7 +151,7 @@ hx_instruction instruction_decode(u32 encoded)
 			return instruction;
 		}
 		default:
-			fprintf(stderr, "invalid instruction opcode\n");
+			fprintf(stderr, "invalid instruction opcode 0x%x\n", opcode);
 			exit(1);
 	}
 }

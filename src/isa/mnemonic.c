@@ -61,6 +61,7 @@ const char *mnemonic_name(hx_mnemonic mnemonic)
 		case HX_MN_MOVZ:	return "movz";
 		case HX_MN_MOVP:	return "movp";
 		case HX_MN_MOVN:	return "movn";
+		case HX_MN_MOV:		return "mov";
 
 		case HX_MN_CSL:		return "csl";
 		case HX_MN_CSINC:	return "csinc";
@@ -129,6 +130,7 @@ u8 mnemonic_opcode(hx_mnemonic mnemonic)
 		case HX_MN_MOVZ:	return 0x43;
 		case HX_MN_MOVP:	return 0x43;
 		case HX_MN_MOVN:	return 0x43;
+		case HX_MN_MOV:		return 0x43;
 
 		case HX_MN_CSL:		return 0x77;
 		case HX_MN_CSINC:	return 0x77;
@@ -308,6 +310,7 @@ hx_mnemonic mnemonic_from_funct3(u8 opcode, u8 funct3)
 				case 0x0: return HX_MN_MOVZ;
 				case 0x1: return HX_MN_MOVP;
 				case 0x2: return HX_MN_MOVN;
+				case 0x3: return HX_MN_MOV;
 				default:  return HX_MN_UNKNOWN;
 			}
 
@@ -464,6 +467,7 @@ hx_mnemonic mnemonic_from_encoding(u8 opcode, u8 funct3, u8 funct7)
 				case 0x0: return HX_MN_MOVZ;
 				case 0x1: return HX_MN_MOVP;
 				case 0x2: return HX_MN_MOVN;
+				case 0x3: return HX_MN_MOV;
 				default:  return HX_MN_UNKNOWN;
 			}
 
