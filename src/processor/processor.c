@@ -519,7 +519,7 @@ static b8 processor_execute(hx_processor *processor, hx_memory *memory, hx_instr
 			u8 rd = instruction->operands[0].value.reg;
 			u16 imm = instruction->operands[1].value.imm;
 
-			processor->gpr[rd] = (s16)imm;
+			processor->gpr[rd] = (s64)(s16)imm;
 
 			return success;
 		}
