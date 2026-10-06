@@ -1,10 +1,10 @@
 pkgname=hem
-pkgver=0.1.0
-pkgrel=1
+pkgver=0.1.1
+pkgrel=0
 pkgdesc="Helix Emulator"
 arch=('x86_64')
 license=('MIT')
-depends=('glibc')
+depends=('glibc' 'flagparser' 'isac')
 makedepends=('clang' 'make' 'git')
 
 source=("https://github.com/Helix-ISA/hem/archive/refs/heads/master.tar.gz")
