@@ -24,6 +24,18 @@ jobs:
       - name: Checkout hem
         uses: actions/checkout@v6
 
+      - name: Configure nucleus repository
+        run: |
+          cat >> /etc/pacman.conf << 'EOF'
+
+          [nucleus]
+          SigLevel = Optional
+          Server = https://helix-isa.github.io/nucleus
+          EOF
+
+          pacman -Sy --noconfirm
+          pacman -S --noconfirm flagparser isac
+
       - name: Build package
         run: |
           useradd -m builder
